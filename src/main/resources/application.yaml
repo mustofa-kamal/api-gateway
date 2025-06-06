@@ -1,0 +1,21 @@
+server:
+  port: 8079
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: trip-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/trips/**
+
+eureka:
+  client:
+    register-with-eureka: true       # ✅ must be true
+    fetch-registry: true             # ✅ must be true to resolve service names
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
